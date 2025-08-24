@@ -1,7 +1,3 @@
-/*Q3. Create a C++ class Box that uses dynamic memory allocation for an integer. Implement the
-Rule of Three by defining a destructor, copy constructor, and copy assignment operator.
-Demonstrate the behavior of both shallow and deep copy using test cases.*/
-
 #include <iostream>
 using namespace std;
 
@@ -10,32 +6,32 @@ class Box
     int *number;
 
 public:
-    Box()
+    Box() // default constructor performing DMA on the one pointer
     {
         number = new int;
     }
-
+    // getter & setter below
     void setNumber(int value) { *number = value; }
     int getNumber() const { return *number; }
 
-    ~Box()
+    ~Box() // destructor to free memory
     {
         delete number;
     }
 
-    Box(const Box &other)
+    Box(const Box &other) // copy constructor to ensure deep copies
     {
         number = new int(*other.number);
     }
 
-    Box &operator=(const Box &other)
+    Box &operator=(const Box &other) // move assignment operator to move one object to another completely
     {
         if (this == &other)
         {
             return *this;
         }
 
-        delete number;
+        delete number; // The memory of the pervious object occupation is freed
         number = new int(*other.number);
         return *this;
     }
@@ -43,6 +39,8 @@ public:
 
 int main()
 {
+
+    // demonstration of the deep copy below
     cout << "Deep Demo:" << endl;
     Box b1;
     b1.setNumber(42);

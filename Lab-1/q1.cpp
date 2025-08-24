@@ -1,57 +1,44 @@
-/*
-Q1. Suppose you are developing a bank account management system, and you have defined the
-BankAccount class with the required constructors. You need to demonstrate the use of these
-constructors in various scenarios.
-1. Default Constructor Usage: Create a default-initialized BankAccount object named
-account1. Print out the balance of account1.
-2. Parameterized Constructor Usage: Create a BankAccount object named account2 with
-an initial balance of $1000. Print out the balance of account2.
-3. Copy Constructor Usage: Using the account2 you created earlier, create a new
-BankAccount object named account3 using the copy constructor. Deduct $200 from
-account3 and print out its balance. Also, print out the balance of account2 to ensure it
-hasn't been affected by the transaction involving account3.
-*/
-
 #include "iostream"
 using namespace std;
 
-class BankAccount
+class BankAccount // creating class
 {
-protected:
-    double balance;
+    double balance; // private var balance
 
 public:
-    BankAccount() : balance(0.0) {}
-    BankAccount(double balance) { this->balance = balance; }
-    BankAccount(const BankAccount &other)
+    BankAccount() : balance(0.0) {}                          // default contructor
+    BankAccount(double balance) { this->balance = balance; } // param constructor
+    BankAccount(const BankAccount &other)                    // copy constructor
     {
         this->balance = other.balance;
     }
-    void displayBalance()
+    void displayBalance() // method to display balance
     {
         cout << "Balance: $" << balance << endl;
     }
-    double deposit(int cash)
+    double deposit(int cash) // method to deposite cash
     {
-        balance += cash;
+        balance += cash; // cash increment to balance
         return balance;
     }
-    double withdraw(int cash)
+    double withdraw(int cash) // method to withdraw cash
     {
-        if (balance >= cash)
+        if (balance >= cash) // if balance is less than cash req thean a warning instead of withdrawal
         {
             balance -= cash;
         }
         else
         {
-            cout << "Insufficient Balance" << endl;
+            cout << "Insufficient Balance" << endl; // warning
         }
-        return balance;
+        return balance; // returns remaining balance
     }
 };
 
 int main()
 {
+
+    // demonstration of deep copy below
 
     BankAccount account1;
 
